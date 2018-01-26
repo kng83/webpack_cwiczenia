@@ -1,0 +1,37 @@
+najpierw npm init aby zrobic package.json
+// instalujemy webpacka
+npm install --save-dev webpack@2.2.0-rc.0
+// Babel transpiluje kod z ES2015 na ES5
+// babel-loader - babel uczy sie jak poradzic sobie z webpackiem
+//babel-core -bierze kod , parsuje i generuje output
+//babel-preset-env - mowi jakie czesci skladni ES2015/6/7 wziasc i zamienic na kod ES5
+//instalacja babel'a
+npm install --save-dev babel-loader babel-core babel-preset-env
+dodajemy do config module (w wersji 1 webpacka bylo to loaders)
+
+//tworzymy plik .babelrc aby powiedziec co babel ma zrobic z poszczegolnymi plikami
+jezeli wtedy babel sie zaladuje to otworzy plik .babelrc i bedzie wiedzial co zrobic z plikami dzieki babel-preset-env
+// nastepny wazny loader to loader do css
+
+// do obslugi css musimy zainstalowac dwa nowe modulu do webpacka css-loader i style-loader
+css-loader - know how to deal with css imports
+style-loader - takes css imports and adds them to the html document (dodaje do dokumentu html)
+npm install --save-dev style-loader css-loader
+
+//extract plugin do wyodrebniania plikow np.: jezeli chcemy by css byl osobno domyslnie trafia on do bundle.js i tam jest
+//dodawany do elementur head
+npm install --save-dev extract-text-webpack-plugin@2.0.0-beta.4
+moduly( loadery) sluza do robienia paczki natomiast plugin robia dodatkowe operacje np. wylaczenie pliku
+loader to to samo co use w skladni tylko starsza
+
+//Ladowanie lokalnych obrazow
+//dwa loadery : image-webpack-loader - robi resize na obrazie dopasowujac wielkosc
+//url-loader: do wyboru czy male zdjecie czy duze rozwiazuje on nam url (jezeli duze zjdecie to trafi do osobnego pliku jak male to
+//jako raw trafi do bundle.js (czyli w postaci binarnej)
+//w moim systemie trzeba jeszcze bylo dodac file-loader !!!
+
+//webapack domyslnie laduje obrazy ze zlego katalogu. By to naprawic musimy dac opcje publicpath w outpucie dzieki temu jak
+//webapck bierze importy np plikow z image_viewer.js to podmienia import z uwzglednieniem nowego url. publicPath: "build/"
+
+//Ladowanie osobno plikow javascript system.import('./nazwa_pliku'). Jezeli importowany plik ma importy z innych plikow one
+//rowniez zostana zaimportowane.Poniewaz system import to obietnica nalezy pozniej uzyc then
